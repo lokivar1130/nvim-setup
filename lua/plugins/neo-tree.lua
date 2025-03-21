@@ -8,11 +8,30 @@ return {
 	},
 	config = function()
 		require("neo-tree").setup({
+			close_if_last_window = false,
 			window = {
-				position = "left", -- set default position to right
+				width = 30,
 			},
-		}) -- Keymap for closing NeoTree explicitly
-
+			buffers = {
+				follow_current_file = { enabled = true },
+			},
+			filesystem = {
+				follow_current_file = {
+					enabled = true,
+				},
+				filtered_items = {
+					hide_dotfiles = false,
+					hide_gitignored = false,
+					hide_by_name = {
+						"node_modules",
+					},
+					never_show = {
+						".DS_Store",
+						"thumbs.db",
+					},
+				},
+			},
+		})
 		vim.keymap.set("n", "<leader>ft", ":Neotree show<CR>", { silent = true })
 
 		vim.keymap.set("n", "<leader>fT", ":Neotree close<CR>", { silent = true })
